@@ -1,0 +1,91 @@
+.TH RUBBER-INFO 1
+.SH NAME
+rubber-info \- extraction d'information de documents LaTeX
+
+.SH SYNOPSIS
+.B rubber-info
+.RI [ options ]
+.RI [ action ]
+.I source
+
+.SH DESCRIPTION
+Rubber-info est un utilitaire destiné à extraire divers types d'information
+d'un document LaTeX. L'information peut être tirée des sources (par exemple
+pour l'analyse de dépendances) ou des logs de compilation (pour extraire
+erreurs et avertissements). Cet utilitaire est un complément au système de
+compilation
+.BR rubber (1).
+
+Les options de ligne de commande sont celles utilisées par
+.BR rubber (1)
+plus l'une des actions décrites plus bas.
+
+.SH ACTIONS
+L'une des options de ligne de commande suivantes doit être spécifiée,
+afin de choisir quel information extraire. Bien entendu, les actions qui
+extraient des informations des logs ne peuvent êtres effectuées que si une
+compilation a effectivement eu lieu. Si aucune de ces actions n'est spécifiée,
+c'est
+.I \-\-check
+qui est utilisée.
+.TP
+.B \-\-boxes
+Extrait du fichier log les emplacements dans le source où la compilation a
+produit des boîtes mal construites (ce sont les fameux overfull et underfull
+\\hbox et \\vbox).
+.TP
+.B \-\-check
+Affiche les erreurs de compilation s'il y en a, sinon énumère les références
+non définies s'il y en a, sinon affiche les avertissements et les boîtes mal
+construites. C'est l'action par défaut.
+.TP
+.B \-\-deps
+Analyse les sources et produit une liste (séparée par des espaces) des noms de
+tous les fichiers dont dépend le document et que Rubber ne peut pas
+reconstituer.
+.TP
+.B \-\-errors
+Extrait du fichier log la liste des erreurs qui sont survenues durant la
+dernière compilation.
+.TP
+.B \-h, \-\-help
+Affiche la liste de toutes les options disponibles et quitte.
+.TP
+.B \-\-refs
+Renvoie la liste des références non définies ou définies plusieurs fois (i.e.
+les \\ref qui ne correspondent pas à exactement un \\label).
+.TP
+.B \-\-rules
+Analyse les sources et produit une liste de règles de dépendances. Une règle
+est produite pour chaque fichier intermédiaire qui serait construit par
+.BR rubber .
+Les règles sont formattées dans le style des Makefile.
+.TP
+.B \-\-version
+Affiche le numéro de version et termine.
+.TP
+.B \-\-warnings
+Affiche stupidement la liste de tous les avertissements de LaTeX, c'est-à-dire
+toutes les lignes du fichier log qui contiennent "Warning".
+.PP
+
+.SH BUGS
+Il y en a surement quelques uns...
+
+Cette page se rapporte à la version 1.2 de Rubber. Le programme et cette
+documentation sont maintenus par Sebastian Kapfer <sebastian.kapfer@fau.de>.
+La page web du programme se trouve à l'adresse https://launchpad.net/rubber.
+
+.SH VOIR AUSSI
+La documentation complète de
+.B rubber
+est maintenue en tant que manuel en Texinfo. Si les programmes
+.B info
+et
+.B rubber
+sont installés correctement sur votre système, la commande
+.IP
+.B info rubber
+.PP
+devrait vous donner accès au manuel complet (en anglais).
+

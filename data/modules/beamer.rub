@@ -1,0 +1,3 @@
+watch $target.head $target.nav $target.snm
+clean $target.head $target.nav $target.snm
+module hyperref

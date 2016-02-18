@@ -1,0 +1,214 @@
+Version 1.2 (2015-06-xx)
+
+  Features:
+    - shell_escape feature to enable -shell-escape in LaTeX.
+      BEWARE: granting shell-escape (write18) to a document permits it
+      to run arbitrary external commands.  Use only on trusted (your own)
+      documents!
+      Usage:  to mark a document as requiring shell-escape, add the line
+            % rubber: shell_escape
+      near the header.  To grant shell-escape to a document, run rubber as
+            rubber --unsafe document.tex
+      There are several older hacks documented on the internet which continue
+      to work, but are deprecated from now on.  The 'arguments' variable
+      will be removed in the future.
+      https://bugs.launchpad.net/rubber/+bug/878629
+    - XeLaTeX support.
+      https://bugs.launchpad.net/rubber/+bug/660426
+      https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=579757
+    - Support for gnuplottex (requires --unsafe)
+    - Experimental PythonTeX support contributed by Ferdinand Schwenk
+      (requires --unsafe).
+
+  Bugfixes:
+    - Fix handling of set{,list} arguments.
+    - Fix BibTeX called with absolute path and refusing to write.
+      https://bugs.launchpad.net/rubber/+bug/1287593
+    - Fix LaTeX parsing with optional whitespace
+      https://bugs.launchpad.net/rubber/+bug/195258
+    - Fix behavior when .aux is not generated
+      https://bugs.launchpad.net/rubber/+bug/1208464
+      https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=402150
+    - Catch broken working directory and print error
+      https://bugs.launchpad.net/rubber/+bug/529198
+    - Fix LoadClassWithOptions
+      https://bugs.launchpad.net/rubber/+bug/1266912
+      https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=718932
+    - Fix \pdfoutput=1
+      https://bugs.launchpad.net/rubber/+bug/921444
+      https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=691305
+    - Update homepage
+      https://bugs.launchpad.net/rubber/+bug/1169485
+    - Fix crash on nonexisting directory
+      https://bugs.launchpad.net/rubber/+bug/529198
+    - Fix CWEB and lhs2tex support which was broken.
+    - Fix stdin being leaked to subprocesses, including LaTeX
+      https://bugs.launchpad.net/rubber/+bug/802169
+
+  And many others...
+
+Version 1.1 (2006-03-17)
+
+  Features:
+    - Support for user-defined conversion rules.
+    - Support for xindy and sam2p.
+    - Improved fig2dev support.
+    - Experimental cache system.
+
+  Bugfixes:
+    - Better parsing of log files.
+    - Improved error reporting (including for BibTeX and Metapost).
+    - Better handling of verbatim environments.
+    - Many other fixes.
+
+Version 1.0 (2005-07-11)
+
+  Features:
+    - More intelligent graphics conversion rules.
+    - New command-line options "--inplace" and "--into".
+    - New command-line option "-W" to report warnings.
+    - New command-line option "--only" for partial compilation.
+    - A completion function for Zsh.
+
+  Bugfixes:
+    - Modules "index" and "verbatim" fixed.
+    - Fixed path searching in Metapost.
+    - Fixed paper size handling (in dvips, dvipdfm, ps2pdf).
+    - Better handling of aux files from \include'd sources.
+
+Version 0.99.8 (2004-08-27)
+
+  Features:
+    - Support for e-TeX and Omega.
+    - Support for package "index".
+    - New directive "onchange".
+    - Support for \includeonly.
+    - Option --maxerr to display only the first errors.
+
+  Bugfixes:
+    - Portability improvement (for Cygwin and hopefully others).
+    - Improved the semantics of directives.
+
+Version 0.99.7 (2004-02-20)
+
+  Features:
+    - Support for VTeX.
+    - Directives "watch" and "clean" for tables of contents and such.
+    - Support for graphics conversion using ImageMagick (lots of new formats).
+    - Support for packages "moreverb", "verbatim", "hyperref", "beamer".
+    - Support for post-processing through dvipdfm.
+    - New frontend "rubber-pipe" with the behaviour of a filter.
+    - New module "expand" to expand inputs and bibliographies.
+    - Support for Literate Haskell code (with lhs2TeX).
+    - Error messages are now issued in the style of GNU compilers.
+    - Compilation by pdfTeX into DVI.
+    - Gzipping of the final document, command-line option "-z".
+
+  Bugfixes:
+    - Error-like messages from pdfTeX are now correctly handled.
+    - Modules are handled correctly when compiling several documents at once.
+    - Better dependency analysis for MetaPost.
+    - Macro arguments can now contain line breaks.
+
+  Packaging:
+    - Introduced Texinfo documentation.
+
+Version 0.99.6 (2003-04-09)
+
+  Features:
+    - Handling of \graphicspath.
+    - Conversion of XFig figures to combined EPS/LaTeX.
+    - Parsing of MetaPost log files for errors.
+    - Automatic JPEG to EPS conversion (with jpeg2ps).
+    - Support for packages "epsfig" and "natbib".
+    - Rubber directives in source comments.
+    - Directives for specifying paths for LaTeX and BibTeX.
+    - Directives to control the operation of Makeindex.
+    - Paper size specification (for dvips).
+
+  Bugfixes:
+    - The action "--deps" in rubber-info now lists each dependency only once.
+    - Kpathsea messages are now reported also during compilation.
+    - Avoided some crashes due to file name tracking in rubber-info.
+    - Fixed and improved CWEB support.
+
+Version 0.99.5 (2002-12-04)
+
+  Features:
+    - New format in error and information display.
+    - The command line now provides a meaningful return code.
+    - New "--short" command-line switch for compact error reports.
+    - New (default) action "--check" in rubber-info.
+    - Parsing of BibTeX log files for errors.
+
+  Bugfixes:
+    - Made the calls to LaTeX and others more portable.
+    - Better date computations (this caused useless compilations).
+    - Avoid crash whith documents with cyclic file inclusion.
+    - The action "--deps" now lists all files the document depends on.
+
+Version 0.99.4 (2002-11-06)
+
+  Features:
+    - Handle correctly multiple .aux files produced by \include.
+    - Support for package "minitoc".
+    - Extraction of bounding boxes from gzipped figures (eps.bb from eps.gz).
+    - Watch for changes in .aux files to avoid useless recompilations.
+
+  Bugfixes:
+    - Behaves better when the execution of external programs fails.
+    - Made the call to epstopdf(1) more portable.
+
+  Miscellaneous:
+    - Introduction of the RPM package.
+    - External program execution now requires Unix-specific features.
+
+Version 0.99.3 (2002-10-12)
+
+  Features:
+    - New actions "--refs" and "--warnings" in rubber-info.
+    - Support for XFig figures (with conversion to EPS, PDF and PNG).
+
+  Bugfixes:
+    - Display problem fixed in Metapost support.
+    - Better parsing of \includegraphics (now handles keyval options).
+
+Version 0.99.2 (2002-09-06)
+
+  Features:
+    - Dependency analysis for Metapost.
+    - New command-line switch "--force" to force recompiling.
+
+  Bugfixes:
+    - Parsing of starred macros.
+    - Support for compilation of a document from a different directory.
+    - Improved source file name tracking in log files.
+
+  Packaging:
+    - Included the man page for rubber-info.
+    - Better dependencies for Debian.
+    - Introduction of TODO and ChangeLog.
+
+Version 0.99.1 (2002-06-21)
+
+  Features:
+    - Initial support for "graphics" and "graphicx" (dependency analysis).
+    - Allowed the processing of several documents with one command line.
+    - Handling of the keyboard interrupt (control-C).
+    - Source file name tracking for error reports.
+    - Page number tracking in rubber-info.
+    - Introduction of the modular support for graphics.
+
+  Bugfixes:
+    - Better error extraction from log files.
+    - Allowed empty suffix for all graphics file names.
+    - Better source searching algorithm.
+
+  Packaging:
+    - Introduced the Debian package.
+    - Added the description of the modules in the man pages.
+
+Version 0.99 (2002-05-31)
+
+This was actually the first version of Rubber. It was a rewrite in Python of
+the now-deceased Eel (that was written in shell script).
